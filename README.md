@@ -24,6 +24,7 @@ module.exports = function(environment) {
     theme: {
       themes: [ 'light', 'dark'], // MANDATORY
       defaultTheme: 'dark', // OPTIONAL
+      useCookie: false, // OPTIONAL
       eventName: 'name of the event to be trigger when the theme changes', // OPTIONAL
       cookieName: 'name of cookie used to save the current theme value', // OPTIONAL
       useAssetMap: [default to true in Prod environment] boolean value to indicate if the assets were fingerprinted and an assetMap.json file is available // OPTIONAL
