@@ -14,10 +14,14 @@ export default Service.extend({
 
     if (this.get('enabled')) {
       if (isNone(map[name])) {
-        warn(`No mapped asset found for: ${name}`,
-          { id: 'ember-theme-changer.asset-map' });
+        warn(
+          `No mapped asset found for: ${name}`,
+          { id: 'ember-theme-changer.asset-map' }
+        );
+
         return null;
       }
+
       resolvedName = map[name];
       debug(`Asset resolved name: ${resolvedName} (source: ${name})`);
     } else {

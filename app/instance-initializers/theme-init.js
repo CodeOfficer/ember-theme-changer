@@ -1,6 +1,7 @@
 export function initialize(applicationInstance) {
-  const themes = applicationInstance.lookup('service:theme-changer');
-  themes._generateStyleTag();
+  applicationInstance
+    .lookup('service:theme-changer')
+    ._generateStyleTag();
 }
 
 export default {
