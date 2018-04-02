@@ -16,7 +16,7 @@ export default Service.extend({
       if (isNone(map[name])) {
         warn(
           `No mapped asset found for: ${name}`,
-          { id: 'ember-theme-changer.asset-map' }
+          { id: 'ember-theme-changerr.asset-map' }
         );
 
         return null;

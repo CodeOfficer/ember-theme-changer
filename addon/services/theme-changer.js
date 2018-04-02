@@ -13,8 +13,8 @@ export default Service.extend(Evented, {
 
   defaultTheme: null,
   useCookie: true,
-  cookieName: 'ember-theme-changer__current-theme',
-  eventName: 'ember-theme-changer__theme-changed',
+  cookieName: 'ember-theme-changerr__current-theme',
+  eventName: 'ember-theme-changerr__theme-changed',
 
   // @private
   init() {
@@ -26,29 +26,29 @@ export default Service.extend(Evented, {
 
     if (!config) {
       warn(
-        'Ember-theme-changer did not find a theme configuration.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
-        { id: 'ember-theme-changer.theme' }
+        'Ember-theme-changerr did not find a theme configuration.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
+        { id: 'ember-theme-changerr.theme' }
       );
 
       return;
     } else if (config.themes == null) {
       warn(
-        'Ember-theme-changer did not find themes in your environment file.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
-        { id: 'ember-theme-changer.themes' }
+        'Ember-theme-changerr did not find themes in your environment file.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
+        { id: 'ember-theme-changerr.themes' }
       );
 
       return;
     } else if (isEmpty(config.themes)) {
       warn(
-        'Ember-theme-changer requires themes to be defined. Please add an array of supported themes in your Environment file.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
-        { id: 'ember-theme-changer.themes.empty' }
+        'Ember-theme-changerr requires themes to be defined. Please add an array of supported themes in your Environment file.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
+        { id: 'ember-theme-changerr.themes.empty' }
       );
 
       return;
     } else if (!isArray(config.themes)) {
       warn(
-        'Ember-theme-changer requires the themes configuration to be an array. Please add an array of supported themes in your Environment file.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
-        { id: 'ember-theme-changer.themes.array' }
+        'Ember-theme-changerr requires the themes configuration to be an array. Please add an array of supported themes in your Environment file.\neg: themes: { themes: [\'theme1\', \'theme2\',...] }.',
+        { id: 'ember-theme-changerr.themes.array' }
       );
 
       return;
@@ -60,16 +60,16 @@ export default Service.extend(Evented, {
       defaultTheme = config.themes.get('firstObject');
 
       warn(
-        `ember-theme-changer did not find a default theme; falling back to "${defaultTheme}".`,
-        { id: 'ember-theme.changer.default-theme' }
+        `Ember-theme-changerr did not find a default theme; falling back to "${defaultTheme}".`,
+        { id: 'ember-theme-changerr.default-theme' }
       );
     } else {
       if (!config.themes.includes(defaultTheme)) {
         const firstTheme = config.themes.get('firstObject');
 
         warn(
-          `ember-theme-changer, default theme '${defaultTheme}' is not listed as part of the themes list: '${config.themes}'. Defaulting to '${firstTheme}'.`,
-          { id: 'ember-theme.changer.invalid-default-theme' }
+          `Ember-theme-changerr, default theme '${defaultTheme}' is not listed as part of the themes list: '${config.themes}'. Defaulting to '${firstTheme}'.`,
+          { id: 'ember-theme.changerr.invalid-default-theme' }
         );
 
         defaultTheme = firstTheme;

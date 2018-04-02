@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-theme-changer',
+  name: 'ember-theme-changerr',
   isDevelopingAddon() {
     return true;
   }

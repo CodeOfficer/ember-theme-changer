@@ -1,14 +1,14 @@
-# ember-theme-changer
+# ember-theme-changerr
 
 This Ember-Addon will help you to switch CSS style files on runtime.
 
-For example, let's say you want to support multiple themes in your app and each of the theme styles is defined in its own CSS file (I'll show you how easy is to accomplish this on Ember). Ember-theme-changer addon provides an easy mechanism to change themes and subscribe to theme changes in your different components to handle those styles that you couldn't define using stylesheet.
+For example, let's say you want to support multiple themes in your app and each of the theme styles is defined in its own CSS file (I'll show you how easy is to accomplish this on Ember). Ember-theme-changerr addon provides an easy mechanism to change themes and subscribe to theme changes in your different components to handle those styles that you couldn't define using stylesheet.
 
 
 
 ## Installation
 
-`ember install ember-theme-changer`
+`ember install ember-theme-changerr`
 
 
 ## Configuration
@@ -47,7 +47,7 @@ fingerprint: {
 More info: https://ember-cli.com/asset-compilation#fingerprinting-and-cdn-urls & https://github.com/rickharrison/broccoli-asset-rev
 
 ## Pre-requisites
-Since v0.3.0 `ember-theme-changer` relies in `ember-cli-head` v0.4.0 addon to load the theme in runtime and provide Fastboot compatibility.
+Since v0.3.0 `ember-theme-changerr` relies in `ember-cli-head` v0.4.0 addon to load the theme in runtime and provide Fastboot compatibility.
 
 If you are not already using `ember-cli-head` (or another addon that requires it) you must follow these 2 simple steps:
 

@@ -1,3 +1,3 @@
-import ThemeChanger from 'ember-theme-changer/services/theme-changer';
+import ThemeChanger from 'ember-theme-changerr/services/theme-changer';
 
 export default ThemeChanger;

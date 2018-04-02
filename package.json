@@ -1,6 +1,6 @@
 {
   "name": "ember-theme-changerr",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Easy way to change themes by swapping CSS files.",
   "keywords": [
     "ember-addon",
@@ -14,7 +14,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/codeofficer/ember-theme-changer",
+  "repository": "https://github.com/codeofficer/ember-theme-changerr",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",

@@ -5,6 +5,6 @@ export function initialize(applicationInstance) {
 }
 
 export default {
-  name: 'ember-theme-changer-init',
+  name: 'ember-theme-changerr-init',
   initialize
 };

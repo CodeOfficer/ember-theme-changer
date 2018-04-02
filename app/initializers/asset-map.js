@@ -35,7 +35,7 @@ export function initialize(app) {
       (/* reason */) => {
         warn(
           'Error loading assetMap.json. Did you forget to set:\nfingerprint: {\n fingerprintAssetMap=true\n}\nin your ember-cli-build file?',
-          { id: 'ember-theme-changer.asset-map' }
+          { id: 'ember-theme-changerr.asset-map' }
         );
       })
     .then(() => {
