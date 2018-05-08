@@ -6,6 +6,13 @@ import Configuration from '../config/environment';
 import { warn } from '@ember/debug';
 
 export function initialize(app) {
+  // if we're in an engine return early as engines
+  // don't need to defer their readiness.
+
+  if (!app.deferReadiness) {
+    return;
+  }
+
   app.deferReadiness();
 
   const useAssetMap = isNone(Configuration.theme.useAssetMap) ?
@@ -26,6 +33,7 @@ export function initialize(app) {
     .then(
       (map = {}) => {
         const prepend = Configuration.theme.assetPrepend || map.prepend;
+
         AssetMap.reopen({
           assetMapHash: map.assets,
           prepend,
