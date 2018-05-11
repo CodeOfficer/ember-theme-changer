@@ -8,13 +8,12 @@ import { warn } from '@ember/debug';
 
 export default Service.extend(Evented, {
   assetMap: service(),
-  cookies: service(),
   headData: service(),
 
   defaultTheme: null,
-  useCookie: true,
-  cookieName: 'ember-theme-changerr__current-theme',
   eventName: 'ember-theme-changerr__theme-changed',
+
+  themeValue: '',
 
   // @private
   init() {
@@ -74,14 +73,7 @@ export default Service.extend(Evented, {
 
         defaultTheme = firstTheme;
       }
-    }
-
-    if (ENV.theme.useCookie === false) {
-      this.set('useCookie', false);
-    }
-
-    if (!isEmpty(ENV.theme.cookieName)) {
-      this.set('cookieName', ENV.theme.cookieName);
+      this.set('themeValue', defaultTheme);
     }
 
     if (!isEmpty(ENV.theme.eventName)) {
@@ -94,11 +86,11 @@ export default Service.extend(Evented, {
   // @private
   _generateStyleTag() {
     const {
-      cookies, useCookie, cookieName, defaultTheme
+      defaultTheme
     } = this.getProperties(
-      'cookies', 'useCookie', 'cookieName', 'defaultTheme'
+      'defaultTheme'
     );
-    const themeValue = (useCookie && cookies.read(cookieName)) || defaultTheme;
+    const themeValue = defaultTheme;
 
     if (!isEmpty(themeValue)) {
       this.set('headData.themeHref', this._getAssetFullPath(themeValue));
@@ -129,36 +121,28 @@ export default Service.extend(Evented, {
   theme: computed({
     get() {
       const {
-        cookies, useCookie, cookieName, defaultTheme, eventName
+        defaultTheme, eventName
       } = this.getProperties(
-        'cookies', 'useCookie', 'cookieName', 'defaultTheme', 'eventName'
+        'defaultTheme', 'eventName'
       );
 
       let themeValue;
 
-      if (useCookie) {
-        themeValue = cookies.read(cookieName);
-        cookies.write(cookieName, themeValue, { path: '/', expires: 'Fri, 31 Dec 9999 23:59:59 GMT' });
-        this.trigger(eventName, themeValue);
-      } else {
-        themeValue = defaultTheme;
-      }
+      themeValue = defaultTheme;
 
       return themeValue;
     },
 
     set(key, value) {
       const {
-        cookies, useCookie, cookieName, eventName
+        eventName
       } = this.getProperties(
-        'cookies', 'useCookie', 'cookieName', 'eventName'
+        'eventName'
       );
 
-      if (useCookie && cookieName) {
-        cookies.write(cookieName, value, { path: '/', expires: 'Fri, 31 Dec 9999 23:59:59 GMT' });
-      }
-
       this.set('headData.themeHref', this._getAssetFullPath(value));
+
+      this.set('themeValue', value);
 
       this.trigger(eventName, value);
 
