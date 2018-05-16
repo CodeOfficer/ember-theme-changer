@@ -8,12 +8,10 @@ import { warn } from '@ember/debug';
 
 export default Service.extend(Evented, {
   assetMap: service(),
-  cookies: service(),
   headData: service(),
 
   defaultTheme: null,
-  useCookie: true,
-  cookieName: 'ember-theme-changerr__current-theme',
+  themeValue: null,
   eventName: 'ember-theme-changerr__theme-changed',
 
   // @private
@@ -74,35 +72,23 @@ export default Service.extend(Evented, {
 
         defaultTheme = firstTheme;
       }
-    }
 
-    if (ENV.theme.useCookie === false) {
-      this.set('useCookie', false);
-    }
-
-    if (!isEmpty(ENV.theme.cookieName)) {
-      this.set('cookieName', ENV.theme.cookieName);
+      this.set('defaultTheme', defaultTheme);
     }
 
     if (!isEmpty(ENV.theme.eventName)) {
       this.set('eventName', ENV.theme.eventName);
     }
 
-    this.set('defaultTheme', defaultTheme);
   },
 
   // @private
   _generateStyleTag() {
-    const {
-      cookies, useCookie, cookieName, defaultTheme
-    } = this.getProperties(
-      'cookies', 'useCookie', 'cookieName', 'defaultTheme'
-    );
-    const themeValue = (useCookie && cookies.read(cookieName)) || defaultTheme;
+    const defaultTheme = this.get('defaultTheme');
 
-    if (!isEmpty(themeValue)) {
-      this.set('headData.themeHref', this._getAssetFullPath(themeValue));
-      this.trigger('theme-changed', themeValue);
+    if (!isEmpty(defaultTheme)) {
+      this.set('headData.themeHref', this._getAssetFullPath(defaultTheme));
+      this.trigger('theme-changed', defaultTheme);
     }
   },
 
@@ -113,53 +99,25 @@ export default Service.extend(Evented, {
 
   // @public
   onThemeChanged(callback) {
-    const eventName = this.get('eventName');
-
-    this.on(eventName, callback);
+    this.on(this.get('eventName'), callback);
   },
 
   // @public
   offThemeChanged() {
-    const eventName = this.get('eventName');
-
-    this.off(eventName);
+    this.off(this.get('eventName'));
   },
 
   // @public
   theme: computed({
     get() {
-      const {
-        cookies, useCookie, cookieName, defaultTheme, eventName
-      } = this.getProperties(
-        'cookies', 'useCookie', 'cookieName', 'defaultTheme', 'eventName'
-      );
-
-      let themeValue;
-
-      if (useCookie) {
-        themeValue = cookies.read(cookieName);
-        cookies.write(cookieName, themeValue, { path: '/', expires: 'Fri, 31 Dec 9999 23:59:59 GMT' });
-        this.trigger(eventName, themeValue);
-      } else {
-        themeValue = defaultTheme;
-      }
-
-      return themeValue;
+      return this.get('defaultTheme');
     },
 
     set(key, value) {
-      const {
-        cookies, useCookie, cookieName, eventName
-      } = this.getProperties(
-        'cookies', 'useCookie', 'cookieName', 'eventName'
-      );
-
-      if (useCookie && cookieName) {
-        cookies.write(cookieName, value, { path: '/', expires: 'Fri, 31 Dec 9999 23:59:59 GMT' });
-      }
+      const eventName = this.get('eventName');
 
       this.set('headData.themeHref', this._getAssetFullPath(value));
-
+      this.set('themeValue', value);
       this.trigger(eventName, value);
 
       return value;
