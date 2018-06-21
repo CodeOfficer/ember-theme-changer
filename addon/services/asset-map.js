@@ -6,7 +6,6 @@ import { isNone } from '@ember/utils';
 export default Service.extend({
   enabled: false,
   assetMapHash: null,
-  prepend: '/',
 
   resolve(name) {
     const map = this.get('assetMapHash');
@@ -28,6 +27,6 @@ export default Service.extend({
       resolvedName = name;
     }
 
-    return this.get('prepend') + resolvedName;
+    return resolvedName;
   }
 });
