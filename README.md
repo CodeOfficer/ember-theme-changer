@@ -25,7 +25,7 @@ module.exports = function(environment) {
       themes: [ 'light', 'dark'], // MANDATORY
       defaultTheme: 'dark', // OPTIONAL
       eventName: 'name of the event to be trigger when the theme changes', // OPTIONAL
-      isRelativePath: false 
+      isRelativePath: [default to true in the Addon] , boolean value to indicate if the assets should be assigned relative url or not [/assetsd/light.css]
       useAssetMap: [default to true in Prod environment] boolean value to indicate if the assets were fingerprinted and an assetMap.json file is available // OPTIONAL
     }
   };
