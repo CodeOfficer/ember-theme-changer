@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Service from '@ember/service';
 import { debug, warn } from '@ember/debug';
 import { isNone } from '@ember/utils';
@@ -17,7 +18,7 @@ export default Service.extend({
     const ENV = owner.factoryFor('config:environment').class;
     const config = ENV.theme;
 
-    if (!config.isRelativePath) {
+    if (Ember.isPresent(config.isRelativePath) && !config.isRelativePath) {
       this.set('isRelativePath', false);
     }
   },
