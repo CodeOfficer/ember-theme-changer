@@ -1,7 +1,6 @@
-import Ember from 'ember';
 import Service from '@ember/service';
 import { debug, warn } from '@ember/debug';
-import { isNone } from '@ember/utils';
+import { isNone, isPresent } from '@ember/utils';
 import { getOwner } from '@ember/application';
 
 export default Service.extend({
@@ -9,7 +8,7 @@ export default Service.extend({
   assetMapHash: null,
   prepend: '/',
   isRelativePath: true,
-  
+
   // @private
   init() {
     this._super(...arguments);
@@ -18,7 +17,7 @@ export default Service.extend({
     const ENV = owner.factoryFor('config:environment').class;
     const config = ENV.theme;
 
-    if (Ember.isPresent(config.isRelativePath) && !config.isRelativePath) {
+    if (isPresent(config.isRelativePath) && !config.isRelativePath) {
       this.set('isRelativePath', false);
     }
   },
@@ -41,11 +40,11 @@ export default Service.extend({
     } else {
       resolvedName = name;
     }
-    
+
     if (this.get('isRelativePath')) {
       return this.get('prepend') + resolvedName;
     }
-    
+
     return resolvedName;
   }
 });
