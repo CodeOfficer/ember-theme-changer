@@ -14,7 +14,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/codeofficer/ember-theme-changerr",
+  "repository": "https://github.com/adopted-ember-addons/ember-theme-changerr",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests",
