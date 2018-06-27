@@ -1,6 +1,6 @@
 {
   "name": "ember-theme-changerr",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Easy way to change themes by swapping CSS files.",
   "keywords": [
     "ember-addon",
