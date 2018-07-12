@@ -15,7 +15,7 @@ export function initialize(app) {
 
   app.deferReadiness();
 
-  const useAssetMap = isNone(Configuration.theme.useAssetMap) ?
+  const useAssetMap = (isNone(Configuration.theme) && isNone(Configuration.theme.useAssetMap)) ?
     Configuration.environment === 'production' :
     Configuration.theme.useAssetMap;
 
