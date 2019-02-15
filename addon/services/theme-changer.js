@@ -55,7 +55,7 @@ export default Service.extend(Evented, {
     let defaultTheme = (config || {}).defaultTheme;
 
     if (defaultTheme == null) {
-      defaultTheme = config.themes.get('firstObject');
+      [defaultTheme] = config.themes;
 
       warn(
         `Ember-theme-changerr did not find a default theme; falling back to "${defaultTheme}".`,
@@ -63,7 +63,7 @@ export default Service.extend(Evented, {
       );
     } else {
       if (!config.themes.includes(defaultTheme)) {
-        const firstTheme = config.themes.get('firstObject');
+        const [firstTheme] = config.themes;
 
         warn(
           `Ember-theme-changerr, default theme '${defaultTheme}' is not listed as part of the themes list: '${config.themes}'. Defaulting to '${firstTheme}'.`,
