@@ -16,7 +16,7 @@ module.exports = {
   },
   rules: {
     // BASIC ESLINT RULES
-    //'array-bracket-spacing': ['error', 'never'], May enforce this in the future
+    // 'array-bracket-spacing': ['error', 'never'], May enforce this in the future
     'arrow-parens': 'error',
     'arrow-spacing': 'error',
     'brace-style': ['error', '1tbs', {
@@ -31,7 +31,7 @@ module.exports = {
     'curly': ['error', 'all'],
     'dot-notation': 'error',
     'dot-location': ['error', 'property'],
-    'generator-star-spacing': ['error', {'before': false, 'after': true}],
+    'generator-star-spacing': ['error', { 'before': false, 'after': true }],
     'indent': ['error', 2, {
       'SwitchCase': 1
     }],
@@ -74,7 +74,7 @@ module.exports = {
       'avoidEscape': true
     }],
     'radix': ['error', 'always'],
-    'rest-spread-spacing': ["error"],
+    'rest-spread-spacing': ['error'],
     'semi': ['error', 'always'],
     'semi-spacing': ['error', {
       'before': false,
