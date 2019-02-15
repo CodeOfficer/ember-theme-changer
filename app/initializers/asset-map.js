@@ -2,7 +2,6 @@ import RSVP from 'rsvp';
 import $ from 'jquery';
 import { isNone } from '@ember/utils';
 import AssetMap from '../services/asset-map';
-import Configuration from '../config/environment';
 import { warn } from '@ember/debug';
 
 export function initialize(app) {
@@ -14,10 +13,11 @@ export function initialize(app) {
   }
 
   app.deferReadiness();
+  const config = app.resolveRegistration('config:environment');
 
-  const useAssetMap = (isNone(Configuration.theme) && isNone(Configuration.theme.useAssetMap)) ?
-    Configuration.environment === 'production' :
-    Configuration.theme.useAssetMap;
+  const useAssetMap = (isNone(config.theme) && isNone(config.theme.useAssetMap)) ?
+    config.environment === 'production' :
+    config.theme.useAssetMap;
 
   if (!useAssetMap) {
     app.register('service:asset-map', AssetMap);
@@ -32,7 +32,7 @@ export function initialize(app) {
   promise
     .then(
       (map = {}) => {
-        const prepend = Configuration.theme.assetPrepend || map.prepend;
+        const prepend = config.theme.assetPrepend || map.prepend;
 
         AssetMap.reopen({
           assetMapHash: map.assets,

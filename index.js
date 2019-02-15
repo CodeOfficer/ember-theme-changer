@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-theme-changerr',
+  name: require('./package').name,
   isDevelopingAddon() {
     return true;
   }

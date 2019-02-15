@@ -4,12 +4,17 @@ This Ember-Addon will help you to switch CSS style files on runtime.
 
 For example, let's say you want to support multiple themes in your app and each of the theme styles is defined in its own CSS file (I'll show you how easy is to accomplish this on Ember). Ember-theme-changerr addon provides an easy mechanism to change themes and subscribe to theme changes in your different components to handle those styles that you couldn't define using stylesheet.
 
+## Compatibility
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
 
 
 ## Installation
 
-`ember install ember-theme-changerr`
-
+```
+ember install ember-theme-changerr
+```
 
 ## Configuration
 
@@ -191,3 +196,7 @@ chartColor,
     this._super(...arguments);
   }
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
