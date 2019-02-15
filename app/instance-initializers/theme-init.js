@@ -1,10 +1,1 @@
-export function initialize(applicationInstance) {
-  applicationInstance
-    .lookup('service:theme-changer')
-    ._generateStyleTag();
-}
-
-export default {
-  name: 'ember-theme-changerr-init',
-  initialize
-};
+export { default, initialize } from 'ember-theme-changerr/instance-initializers/theme-init';
