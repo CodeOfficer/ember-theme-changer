@@ -1,25 +1,33 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { setProperties } from '@ember/object';
+import Service from '@ember/service';
 
 module('Unit | Service | theme-changer', function(hooks) {
   setupTest(hooks);
 
-  test('it changes the themeHref when the theme changes', function(assert) {
-    const service = this.owner.lookup('service:theme-changer');
+  hooks.beforeEach(function() {
+    const assetMapHash = {
+      'assets/light.css': '/assets/light-output.css',
+      'assets/dark.css': '/assets/dark-output.css'
+    };
 
-    setProperties(service.assetMap, {
+    const AssetMapStub = Service.extend({
       enabled: true,
-      assetMapHash: {
-        'assets/light.css': 'assets/light-output.css',
-        'assets/dark.css': 'assets/dark-output.css'
+      resolve(name) {
+        return assetMapHash[name];
       }
     });
 
+    this.owner.register('service:assetMap', AssetMapStub);
+  });
+
+  test('it changes the themeHref when the theme changes', function(assert) {
+    const service = this.owner.lookup('service:theme-changer');
+
     service.set('theme', 'light');
-    assert.equal(service.headData.themeHref, '/assets/light-output.css');
+    assert.equal(service.get('headData.themeHref'), '/assets/light-output.css');
 
     service.set('theme', 'dark');
-    assert.equal(service.headData.themeHref, '/assets/dark-output.css');
+    assert.equal(service.get('headData.themeHref'), '/assets/dark-output.css');
   });
 });
