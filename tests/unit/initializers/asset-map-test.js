@@ -2,7 +2,6 @@ import Application from '@ember/application';
 import Pretender from 'pretender';
 import { initialize } from 'dummy/initializers/asset-map';
 import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
 import { run } from '@ember/runloop';
 
 function assetMapSuccess() {
@@ -24,8 +23,6 @@ function assetMapFailure() {
 }
 
 module('Unit | Initializer | asset-map', function(hooks) {
-  setupTest(hooks);
-
   hooks.beforeEach(function() {
     this.TestApplication = Application.extend();
     this.TestApplication.initializer({
@@ -39,10 +36,13 @@ module('Unit | Initializer | asset-map', function(hooks) {
 
   hooks.afterEach(function() {
     run(this.application, 'destroy');
+    run(this.instance, 'destroy');
     run(this.server, 'shutdown');
   });
 
   test('initializes the assetMap to resolve assets', async function(assert) {
+    assert.expect(2);
+
     this.application.register('config:environment', {
       theme: {
         useAssetMap: true
@@ -51,24 +51,18 @@ module('Unit | Initializer | asset-map', function(hooks) {
 
     this.server.map(assetMapSuccess);
 
-    let instance;
+    await this.application.boot();
+    this.instance = this.application.buildInstance();
 
-    try {
-      await this.application.boot();
-      instance = this.application.buildInstance();
+    const assetMap = this.instance.lookup('service:asset-map');
 
-      const assetMap = instance.lookup('service:asset-map');
-
-      assert.equal(assetMap.resolve('light'), '/light.css');
-      assert.equal(assetMap.resolve('dark'), '/dark.css');
-    } catch (error) {
-      assert.notOk(error);
-    } finally {
-      instance && run(instance, 'destroy');
-    }
+    assert.equal(assetMap.resolve('light'), '/light.css');
+    assert.equal(assetMap.resolve('dark'), '/dark.css');
   });
 
   test('it handles asset request failures', async function(assert) {
+    assert.expect(1);
+
     this.application.register('config:environment', {
       theme: {
         useAssetMap: true
@@ -77,19 +71,11 @@ module('Unit | Initializer | asset-map', function(hooks) {
 
     this.server.map(assetMapFailure);
 
-    let instance;
+    await this.application.boot();
+    this.instance = this.application.buildInstance();
 
-    try {
-      await this.application.boot();
-      instance = this.application.buildInstance();
+    const assetMap = this.instance.lookup('service:asset-map');
 
-      const assetMap = instance.lookup('service:asset-map');
-
-      assert.equal(assetMap.enabled, false);
-    } catch (error) {
-      assert.notOk(error);
-    } finally {
-      instance && run(instance, 'destroy');
-    }
+    assert.equal(assetMap.enabled, false, 'Asset map is disabled');
   });
 });

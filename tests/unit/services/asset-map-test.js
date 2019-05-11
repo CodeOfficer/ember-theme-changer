@@ -23,6 +23,6 @@ module('Unit | Service | asset-map', function(hooks) {
   test('it resolves null for unknown themes', function(assert) {
     const service = this.owner.lookup('service:asset-map');
 
-    assert.equal(service.resolve('unknown'), null);
+    assert.equal(service.resolve('unknown'), '/unknown');
   });
 });

@@ -35,14 +35,13 @@ export function initialize(app) {
     throw new Error('Network response was not ok.');
   }).then((map) => {
     const prepend = config.theme.assetPrepend || map.prepend;
-
-    AssetMap.reopen({
+    const EnabledAssetMap = AssetMap.extend({
       assetMapHash: map.assets,
       prepend,
       enabled: true
     });
 
-    app.register('service:asset-map', AssetMap);
+    app.register('service:asset-map', EnabledAssetMap);
   }).catch(() => {
     warn(
       'Error loading assetMap.json. Did you forget to set:\nfingerprint: {\n fingerprintAssetMap=true\n}\nin your ember-cli-build file?',
